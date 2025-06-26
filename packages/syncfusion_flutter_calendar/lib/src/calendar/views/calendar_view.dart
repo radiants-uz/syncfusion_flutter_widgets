@@ -591,6 +591,10 @@ class _CustomCalendarScrollViewState extends State<CustomCalendarScrollView>
         );
 
     final Widget customScrollWidget = GestureDetector(
+      supportedDevices: const {
+        PointerDeviceKind.mouse,
+        PointerDeviceKind.touch,
+      },
       onTapDown: (TapDownDetails details) {
         if (!_focusNode.hasFocus) {
           _focusNode.requestFocus();
@@ -695,6 +699,10 @@ class _CustomCalendarScrollViewState extends State<CustomCalendarScrollView>
     );
 
     return GestureDetector(
+      supportedDevices: const {
+        PointerDeviceKind.mouse,
+        PointerDeviceKind.touch,
+      },
       onLongPressStart: (LongPressStartDetails details) {
         _handleLongPressStart(
           details,
@@ -753,52 +761,58 @@ class _CustomCalendarScrollViewState extends State<CustomCalendarScrollView>
                             HorizontalDragGestureRecognizer:
                                 GestureRecognizerFactoryWithHandlers<
                                   HorizontalDragGestureRecognizer
-                                >(() => HorizontalDragGestureRecognizer(), (
-                                  HorizontalDragGestureRecognizer instance,
-                                ) {
-                                  instance.onUpdate = (
-                                    DragUpdateDetails details,
-                                  ) {
-                                    _handleDragUpdate(
-                                      details,
-                                      isTimelineView,
-                                      isResourceEnabled,
-                                      isMonthView,
-                                      viewHeaderHeight,
-                                      timeLabelWidth,
-                                      resourceItemHeight,
-                                      weekNumberPanelWidth,
-                                      isNeedDragAndDrop,
-                                      resourceViewSize,
-                                    );
-                                  };
-                                  instance.onStart = (
-                                    DragStartDetails details,
-                                  ) {
-                                    _handleDragStart(
-                                      details,
-                                      isNeedDragAndDrop,
-                                      isTimelineView,
-                                      isResourceEnabled,
-                                      viewHeaderHeight,
-                                      timeLabelWidth,
-                                      resourceViewSize,
-                                    );
-                                  };
-                                  instance.onEnd = (DragEndDetails details) {
-                                    _handleDragEnd(
-                                      details,
-                                      isTimelineView,
-                                      isResourceEnabled,
-                                      isMonthView,
-                                      viewHeaderHeight,
-                                      timeLabelWidth,
-                                      weekNumberPanelWidth,
-                                      isNeedDragAndDrop,
-                                    );
-                                  };
-                                  instance.onCancel = _handleDragCancel;
-                                }),
+                                >(
+                                  () => HorizontalDragGestureRecognizer(
+                                    supportedDevices: {
+                                      PointerDeviceKind.mouse,
+                                      PointerDeviceKind.touch,
+                                    },
+                                  ),
+                                  (HorizontalDragGestureRecognizer instance) {
+                                    instance.onUpdate = (
+                                      DragUpdateDetails details,
+                                    ) {
+                                      _handleDragUpdate(
+                                        details,
+                                        isTimelineView,
+                                        isResourceEnabled,
+                                        isMonthView,
+                                        viewHeaderHeight,
+                                        timeLabelWidth,
+                                        resourceItemHeight,
+                                        weekNumberPanelWidth,
+                                        isNeedDragAndDrop,
+                                        resourceViewSize,
+                                      );
+                                    };
+                                    instance.onStart = (
+                                      DragStartDetails details,
+                                    ) {
+                                      _handleDragStart(
+                                        details,
+                                        isNeedDragAndDrop,
+                                        isTimelineView,
+                                        isResourceEnabled,
+                                        viewHeaderHeight,
+                                        timeLabelWidth,
+                                        resourceViewSize,
+                                      );
+                                    };
+                                    instance.onEnd = (DragEndDetails details) {
+                                      _handleDragEnd(
+                                        details,
+                                        isTimelineView,
+                                        isResourceEnabled,
+                                        isMonthView,
+                                        viewHeaderHeight,
+                                        timeLabelWidth,
+                                        weekNumberPanelWidth,
+                                        isNeedDragAndDrop,
+                                      );
+                                    };
+                                    instance.onCancel = _handleDragCancel;
+                                  },
+                                ),
                           },
                           behavior: HitTestBehavior.opaque,
                           child: customScrollWidget,
