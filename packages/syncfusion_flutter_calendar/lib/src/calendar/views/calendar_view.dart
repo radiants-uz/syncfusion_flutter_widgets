@@ -980,7 +980,12 @@ class _CustomCalendarScrollViewState extends State<CustomCalendarScrollView>
     double viewHeaderHeight,
     double timeLabelWidth,
   ) {
-    final _CalendarViewState currentState = _getCurrentViewByVisibleDates()!;
+    final _CalendarViewState? currentState = _getCurrentViewByVisibleDates();
+    // TODO: added by me
+    if (currentState == null) {
+      return;
+    }
+    //
     AppointmentView? appointmentView = _getDragAppointment(
       details,
       currentState,
@@ -13350,11 +13355,9 @@ class _ViewHeaderViewPainter extends CustomPainter {
 
     for (int i = 0; i < DateTime.daysPerWeek; i++) {
       final DateTime currentDate = visibleDates[i];
-      String dayText =
-          DateFormat(
-            monthViewSettings.dayFormat,
-            locale,
-          ).format(currentDate).toUpperCase();
+      String dayText = capitalize(
+        DateFormat(monthViewSettings.dayFormat, locale).format(currentDate),
+      );
 
       dayText = _updateViewHeaderFormat(monthViewSettings.dayFormat, dayText);
 
@@ -13430,6 +13433,13 @@ class _ViewHeaderViewPainter extends CustomPainter {
     }
   }
 
+  String capitalize(String str) {
+    if (str.isEmpty) {
+      return str;
+    }
+    return str[0].toUpperCase() + str.substring(1).toLowerCase();
+  }
+
   void _addViewHeaderForTimeSlotViews(
     Canvas canvas,
     Size size,
@@ -13465,20 +13475,18 @@ class _ViewHeaderViewPainter extends CustomPainter {
     for (int i = 0; i < visibleDatesLength; i++) {
       final DateTime currentDate = visibleDates[i];
 
-      String dayText =
-          DateFormat(
-            timeSlotViewSettings.dayFormat,
-            locale,
-          ).format(currentDate).toUpperCase();
+      String dayText = capitalize(
+        DateFormat(timeSlotViewSettings.dayFormat, locale).format(currentDate),
+      );
 
       dayText = _updateViewHeaderFormat(
         timeSlotViewSettings.dayFormat,
         dayText,
       );
 
-      final String dateText = DateFormat(
-        timeSlotViewSettings.dateFormat,
-      ).format(currentDate);
+      final String dateText = capitalize(
+        DateFormat(timeSlotViewSettings.dateFormat, locale).format(currentDate),
+      );
       final bool isToday = isSameDate(currentDate, today);
       if (isToday) {
         final Color? todayTextStyleColor = calendarTheme.todayTextStyle!.color;
