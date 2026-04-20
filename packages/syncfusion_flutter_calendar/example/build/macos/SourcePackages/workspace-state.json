@@ -1,0 +1,24 @@
+{
+  "object" : {
+    "artifacts" : [
+
+    ],
+    "dependencies" : [
+      {
+        "basedOn" : null,
+        "packageRef" : {
+          "identity" : "fluttergeneratedpluginswiftpackage",
+          "kind" : "fileSystem",
+          "location" : "/Users/daler/Documents/GitHub/syncfusion_flutter_widgets/packages/syncfusion_flutter_calendar/example/macos/Flutter/ephemeral/Packages/FlutterGeneratedPluginSwiftPackage",
+          "name" : "FlutterGeneratedPluginSwiftPackage"
+        },
+        "state" : {
+          "name" : "fileSystem",
+          "path" : "/Users/daler/Documents/GitHub/syncfusion_flutter_widgets/packages/syncfusion_flutter_calendar/example/macos/Flutter/ephemeral/Packages/FlutterGeneratedPluginSwiftPackage"
+        },
+        "subpath" : "fluttergeneratedpluginswiftpackage"
+      }
+    ]
+  },
+  "version" : 6
+}
